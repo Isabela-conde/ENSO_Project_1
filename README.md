@@ -17,11 +17,11 @@ We compare how the mean state of the two periods (1976--2000, and 2001--2024) af
 We do so by considering components of zonal, meridonal and vertical advection terms, as follows:
 
 
-\[
+$$
     ADV_X &= -u' \frac{\partial \overline{T}}{\partial x} - \overline{u} \frac{\partial T'}{\partial x}\\
     ADV_Y = &= -v' \frac{\partial \overline{T}}{\partial y} - \overline{v} \frac{\partial T'}{\partial y}\\
     ADV_z = &= -w' \frac{\partial \overline{T}}{\partial w} - \overline{w} \frac{\partial T'}{\partial w}\\
-\]
+$$
 
 In this instance, by separating velocities in terms of anomaly and climatology we can better understand how the mean the difference in mean-state affects the anomalous velocity.
 
