@@ -42,7 +42,7 @@ dtdx=dtdx.interp(lat=ulat) # interpolate tlat to ulat
 dtdx.name="dtdx"
 dtdx.attrs["units"]="K /m"
 #%%
-dtdx.to_netcdf(f"{datadir}/dtdx.merged.nc")
+# dtdx.to_netcdf(f"{datadir}/dtdx.merged.nc")
 #%%--------------------------------------------------------
 # meridional gradient
 #----------------------------------------------------------
@@ -53,7 +53,7 @@ dtdy=dtdy.interp(lon=ulon) # interpolate tlon to ulon
 dtdy.name="dtdy"
 dtdy.attrs["units"]="K /m"
 #%%
-dtdy.to_netcdf(f"{datadir}/dtdy.merged.nc")
+# dtdy.to_netcdf(f"{datadir}/dtdy.merged.nc")
 # %%--------------------------------------------------------
 # vertical gradient
 #----------------------------------------------------------
@@ -64,5 +64,5 @@ dtdz=dtdz.interp(lat=w_da.lat,method="linear")
 dtdz.name="dtdz"
 dtdz.attrs["units"]="K/m"
 # %%
-dtdz.to_netcdf(f"{datadir}/dtdz.merged.nc")
+# dtdz.to_netcdf(f"{datadir}/dtdz.merged.nc")
 # %%
