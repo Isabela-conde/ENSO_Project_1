@@ -41,18 +41,18 @@ def xr_ydev(var,lat,ydim="lat",rad_earth=6371e3):
 #----------------------------------------------------------
 dtdy=xr_ydev(tmp_da,tmp_da.lat)
 #%%
-dtdy["lat"]=ulat[:]
-dtdy=dtdy.interp(lon=ulon)
+dtdy["lat"]=ulat[:] # convert tlat to match ulat
+dtdy=dtdy.interp(lon=ulon) # interpolate tlon to ulon
 dtdy.name="dtdy"
 dtdy.attrs["units"]="K /m"
 #%%
 dtdy.to_netcdf(f"{datadir}/dtdy.merged.nc")
 # udtdy.to_netcdf(f"{datadir}/udtdy.merged.nc")
+#%%--------------------------------------------------------
+
 #%%
-def rm_bar(var):
-    clim = var.groupby('time.month').mean('time')
-    return var.groupby('time.month') - clim
-#%%
+# calculate monthly climatology and anomalies
+# bar: climatology, prm: anomaly
 dtdy_bar=dtdy.groupby('time.month').mean('time')
 dtdy_prm=dtdy.groupby('time.month') - dtdy_bar
 v_bar=v_da.groupby('time.month').mean('time')
