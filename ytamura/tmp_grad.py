@@ -4,10 +4,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 # %%
 datadir="/Volumes/Raid2/tamura/GODAS/data"
-u_da=xr.open_dataset(f"{datadir}/ucur.merged.nc").sel(lat=slice(-6,6)).ucur
-v_da=xr.open_dataset(f"{datadir}/vcur.merged.nc").sel(lat=slice(-6,6)).vcur
-w_da=xr.open_dataset(f"{datadir}/dzdt.merged.nc").sel(lat=slice(-6,6)).dzdt
-tmp_da=xr.open_dataset(f"{datadir}/pottmp.merged.nc").sel(lat=slice(-6,6)).pottmp
+u_da=xr.open_dataset(f"{datadir}/ucur.merged.nc").sel(lat=slice(-20,20)).ucur
+v_da=xr.open_dataset(f"{datadir}/vcur.merged.nc").sel(lat=slice(-20,20)).vcur
+w_da=xr.open_dataset(f"{datadir}/dzdt.merged.nc").sel(lat=slice(-20,20)).dzdt
+tmp_da=xr.open_dataset(f"{datadir}/pottmp.merged.nc").sel(lat=slice(-20,20)).pottmp
 
 ulon,ulat=u_da.lon.values,u_da.lat.values
 tlon,tlat=tmp_da.lon.values,tmp_da.lat.values
@@ -42,7 +42,7 @@ dtdx=dtdx.interp(lat=ulat) # interpolate tlat to ulat
 dtdx.name="dtdx"
 dtdx.attrs["units"]="K /m"
 #%%
-# dtdx.to_netcdf(f"{datadir}/dtdx.merged.nc")
+dtdx.to_netcdf(f"{datadir}/dtdx.merged.nc")
 #%%--------------------------------------------------------
 # meridional gradient
 #----------------------------------------------------------
@@ -53,7 +53,7 @@ dtdy=dtdy.interp(lon=ulon) # interpolate tlon to ulon
 dtdy.name="dtdy"
 dtdy.attrs["units"]="K /m"
 #%%
-# dtdy.to_netcdf(f"{datadir}/dtdy.merged.nc")
+dtdy.to_netcdf(f"{datadir}/dtdy.merged.nc")
 # %%--------------------------------------------------------
 # vertical gradient
 #----------------------------------------------------------
@@ -64,5 +64,5 @@ dtdz=dtdz.interp(lat=w_da.lat,method="linear")
 dtdz.name="dtdz"
 dtdz.attrs["units"]="K/m"
 # %%
-# dtdz.to_netcdf(f"{datadir}/dtdz.merged.nc")
+dtdz.to_netcdf(f"{datadir}/dtdz.merged.nc")
 # %%
