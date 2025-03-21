@@ -51,7 +51,7 @@ Notes:
 
 uploaded MERRA2 data, you can use the following code snippet to collate data
 
-`
+```
 # Path to the directory
 directory_path = '/Users/isabelaconde/Desktop/data/MERRA2/M2TMNXOCN_5.12.4-20250130_234513' # change to your download path
 
@@ -61,4 +61,5 @@ file_paths = [os.path.join(directory_path, file) for file in file_names]
 file_paths
 
 merra2 = xr.open_mfdataset(file_paths, combine='by_coords')
-`
+```
+
