@@ -20,6 +20,10 @@ tlev=tmp_da.level.values
 p1=[np.datetime64("1980-01-01"),np.datetime64("2000-12-01")]
 p2=[np.datetime64("2001-01-01"),np.datetime64("2021-12-01")]
 #%%
+u_dtdx=u_da*dtdx
+v_dtdy=v_da*dtdy
+w_dtdz=w_da*dtdz
+#%%
 # calculate monthly climatology and anomalies
 # bar: climatology, prm: anomaly
 yr1,yr2=1980,2000
@@ -85,38 +89,43 @@ cos_lat=np.cos(xr.DataArray(np.deg2rad(ulat),coords={"lat":ulat}))
 wcos_lat=cos_lat/cos_lat.median()
 def wcoslat_amean(var,wcos_lat=wcos_lat,mdims=("lat","lon")):
     return (var*wcos_lat).mean(mdims)
-# Sum over the region
+# Average over the region
 # Niño 3
-ubar_dtdxprm_n3=wcoslat_amean(ubar_dtdxprm.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
-uprm_dtdxbar_n3=wcoslat_amean(uprm_dtdxbar.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
-vbar_dtdyprm_n3=wcoslat_amean(vbar_dtdyprm.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
-vprm_dtdybar_n3=wcoslat_amean(vprm_dtdybar.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
-wbar_dtdzprm_n3=wcoslat_amean(wbar_dtdzprm.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
-wprm_dtdzbar_n3=wcoslat_amean(wprm_dtdzbar.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
+ubar_dtdxprm_n3=wcoslat_amean(ubar_dtdxprm_zm.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
+uprm_dtdxbar_n3=wcoslat_amean(uprm_dtdxbar_zm.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
+vbar_dtdyprm_n3=wcoslat_amean(vbar_dtdyprm_zm.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
+vprm_dtdybar_n3=wcoslat_amean(vprm_dtdybar_zm.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
+wbar_dtdzprm_n3=wcoslat_amean(wbar_dtdzprm_zm.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
+wprm_dtdzbar_n3=wcoslat_amean(wprm_dtdzbar_zm.sel(lat=slice(lat1_n3,lat2_n3),lon=slice(lon1_n3,lon2_n3)))
 # Niño 4
-ubar_dtdxprm_n4=wcoslat_amean(ubar_dtdxprm.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
-uprm_dtdxbar_n4=wcoslat_amean(uprm_dtdxbar.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
-vbar_dtdyprm_n4=wcoslat_amean(vbar_dtdyprm.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
-vprm_dtdybar_n4=wcoslat_amean(vprm_dtdybar.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
-wbar_dtdzprm_n4=wcoslat_amean(wbar_dtdzprm.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
-wprm_dtdzbar_n4=wcoslat_amean(wprm_dtdzbar.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
+ubar_dtdxprm_n4=wcoslat_amean(ubar_dtdxprm_zm.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
+uprm_dtdxbar_n4=wcoslat_amean(uprm_dtdxbar_zm.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
+vbar_dtdyprm_n4=wcoslat_amean(vbar_dtdyprm_zm.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
+vprm_dtdybar_n4=wcoslat_amean(vprm_dtdybar_zm.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
+wbar_dtdzprm_n4=wcoslat_amean(wbar_dtdzprm_zm.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
+wprm_dtdzbar_n4=wcoslat_amean(wprm_dtdzbar_zm.sel(lat=slice(lat1_n4,lat2_n4),lon=slice(lon1_n4,lon2_n4)))
 # %%
 # Save DataArrays to netCDF files
-output_dir = datadir  # Use the data directory as the output directory
+output_dir = "/Volumes/Raid2/tamura/GODAS/mhb"  # Use the data directory as the output directory
 
 variables_n3 = [ubar_dtdxprm_n3, uprm_dtdxbar_n3, vbar_dtdyprm_n3, vprm_dtdybar_n3, wbar_dtdzprm_n3, wprm_dtdzbar_n3]
 variables_n4 = [ubar_dtdxprm_n4, uprm_dtdxbar_n4, vbar_dtdyprm_n4, vprm_dtdybar_n4, wbar_dtdzprm_n4, wprm_dtdzbar_n4]
+variables_zm = [ubar_dtdxprm_zm, uprm_dtdxbar_zm, vbar_dtdyprm_zm, vprm_dtdybar_zm, wbar_dtdzprm_zm, wprm_dtdzbar_zm]
 
-for var in variables_n3:
-    var.to_netcdf(f"{output_dir}/{var.name}_n3_{yr1}-{yr2}.nc")
+for var in variables_zm:
+    var.to_netcdf(f"{output_dir}/{var.name}_zm_{yr1}-{yr2}.nc")
 
-for var in variables_n4:
-    var.to_netcdf(f"{output_dir}/{var.name}_n4_{yr1}-{yr2}.nc")
-# %%
+# for var in variables_n4:
+#     var.to_netcdf(f"{output_dir}/{var.name}_n4_{yr1}-{yr2}.nc")
+#%%
+u_dtdx.to_netcdf(f"{output_dir}/u_dtdx.nc")
+v_dtdy.to_netcdf(f"{output_dir}/v_dtdy.nc")
+w_dtdz.to_netcdf(f"{output_dir}/w_dtdz.nc")
+# %%==================================================================================
 # Check data
 import tamdraw as dr # pip install git+https://github.com/y-tamura/tamdraw.git
 import cartopy.crs as ccrs
-#%%
+#%%===================================================================================
 t1,t2=np.datetime64("1998-10-01"),np.datetime64("1998-11-01")
 var=5e5*dtdx[:,0]#ubar_dtdxprm
 nax=var.sel(time=slice(t1,t2)).time.size
