@@ -46,3 +46,19 @@ Notes:
 
 - Please add any thought to this and if you know the answer to any of the questions please let me know or add!
 - Also my jupyter notebook has some math in markdown if anybody is intrested.
+
+  ## MERRA2 data files
+
+uploaded MERRA2 data, you can use the following code snippet to collate data
+
+`
+# Path to the directory
+directory_path = '/Users/isabelaconde/Desktop/data/MERRA2/M2TMNXOCN_5.12.4-20250130_234513' # change to your download path
+
+# List all files in the directory
+file_names = os.listdir(directory_path)
+file_paths = [os.path.join(directory_path, file) for file in file_names]
+file_paths
+
+merra2 = xr.open_mfdataset(file_paths, combine='by_coords')
+`
