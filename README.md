@@ -46,3 +46,6 @@ Notes:
 
 - Please add any thought to this and if you know the answer to any of the questions please let me know or add!
 - Also my jupyter notebook has some math in markdown if anybody is intrested.
+
+
+
